@@ -18,6 +18,9 @@ define('AVILIB_VERSION', '2.0');
 define('AVILIB_PATH', plugin_dir_path(__FILE__));
 define('AVILIB_URL', plugin_dir_url(__FILE__));
 
+// Cargar el activador directamente
+require_once AVILIB_PATH . 'includes/class-avilib-activator.php';
+
 // Cargar el autoloader
 require_once AVILIB_PATH . 'includes/class-avilib-autoloader.php';
 
