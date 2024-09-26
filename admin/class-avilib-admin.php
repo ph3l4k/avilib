@@ -1,23 +1,14 @@
 <?php
 class Avilib_Admin {
-    private $plugin_name;
-    private $version;
-
-    public function __construct($plugin_name, $version) {
-        $this->plugin_name = $plugin_name;
-        $this->version = $version;
-    }
-
-    public function enqueue_styles() {
-        wp_enqueue_style($this->plugin_name, AVILIB_URL . 'admin/css/avilib-admin.css', array(), $this->version, 'all');
+    public function enqueue_styles($hook) {
+        wp_enqueue_style('avilib-admin', AVILIB_URL . 'admin/css/avilib-admin.css', array(), AVILIB_VERSION, 'all');
     }
 
     public function enqueue_scripts($hook) {
-        wp_enqueue_script($this->plugin_name, AVILIB_URL . 'admin/js/avilib-admin.js', array('jquery'), $this->version, false);
-    
-        // Cargar el script solo en la página de plugins
+        wp_enqueue_script('avilib-admin', AVILIB_URL . 'admin/js/avilib-admin.js', array('jquery'), AVILIB_VERSION, false);
+
         if ($hook === 'plugins.php') {
-            wp_enqueue_script('avilib-uninstall', AVILIB_URL . 'admin/js/avilib-uninstall.js', array('jquery'), $this->version, true);
+            wp_enqueue_script('avilib-uninstall', AVILIB_URL . 'admin/js/avilib-uninstall.js', array('jquery'), AVILIB_VERSION, true);
         }
     }
 

@@ -10,7 +10,7 @@ class Avilib_Activator {
 
         $sql = array();
 
-        $sql[] = "CREATE TABLE {$wpdb->prefix}avilib_video_requests (
+        $sql[] = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}avilib_video_requests (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             title text NOT NULL,
             url text NOT NULL,
@@ -19,7 +19,7 @@ class Avilib_Activator {
             PRIMARY KEY (id)
         ) $charset_collate;";
 
-        $sql[] = "CREATE TABLE {$wpdb->prefix}avilib_accepted_videos (
+        $sql[] = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}avilib_accepted_videos (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             title text NOT NULL,
             url text NOT NULL,
