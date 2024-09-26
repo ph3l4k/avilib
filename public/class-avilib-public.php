@@ -32,4 +32,20 @@ class Avilib_Public {
         require_once AVILIB_PATH . 'public/partials/avilib-public-accepted-videos.php';
         return ob_get_clean();
     }
+
+    public static function convert_to_embed_url($url) {
+        if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $url, $id)) {
+            return 'https://www.youtube.com/embed/' . $id[1];
+        } elseif (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $url, $id)) {
+            return 'https://www.youtube.com/embed/' . $id[1];
+        } elseif (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $url, $id)) {
+            return 'https://www.youtube.com/embed/' . $id[1];
+        } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $url, $id)) {
+            return 'https://www.youtube.com/embed/' . $id[1];
+        } elseif (preg_match('/vimeo\.com\/([^\&\?\/]+)/', $url, $id)) {
+            return 'https://player.vimeo.com/video/' . $id[1];
+        }
+        return $url;
+    }
+    
 }

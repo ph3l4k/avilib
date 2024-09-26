@@ -1,3 +1,39 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['avilib_submit'])) {
+    global $wpdb;
+    $title = sanitize_text_field($_POST['title']);
+    $url = esc_url_raw($_POST['url']);
+    $categories = isset($_POST['categories']) ? array_map('intval', $_POST['categories']) : array();
+
+    // Verificar si la URL ya existe
+    $existing_video = $wpdb->get_var($wpdb->prepare(
+        "SELECT id FROM {$wpdb->prefix}avilib_video_requests WHERE url = %s
+         UNION
+         SELECT id FROM {$wpdb->prefix}avilib_accepted_videos WHERE url = %s",
+        $url, $url
+    ));
+
+    if ($existing_video) {
+        echo '<p class="avilib-error">' . __('This video URL already exists in our system.', 'avilib') . '</p>';
+    } else {
+        $wpdb->insert(
+            "{$wpdb->prefix}avilib_video_requests",
+            array('title' => $title, 'url' => $url, 'status' => 'pending')
+        );
+        $video_id = $wpdb->insert_id;
+
+        foreach ($categories as $category_id) {
+            $wpdb->insert(
+                "{$wpdb->prefix}avilib_video_request_categories",
+                array('video_request_id' => $video_id, 'category_id' => $category_id)
+            );
+        }
+
+        echo '<p class="avilib-success">' . __('Video request submitted successfully!', 'avilib') . '</p>';
+    }
+}
+?>
+
 <form method="post" class="avilib-form">
     <div class="form-group">
         <label for="title"><?php _e('Title:', 'avilib'); ?></label>
