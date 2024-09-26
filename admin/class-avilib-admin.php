@@ -12,8 +12,13 @@ class Avilib_Admin {
         wp_enqueue_style($this->plugin_name, AVILIB_URL . 'admin/css/avilib-admin.css', array(), $this->version, 'all');
     }
 
-    public function enqueue_scripts() {
+    public function enqueue_scripts($hook) {
         wp_enqueue_script($this->plugin_name, AVILIB_URL . 'admin/js/avilib-admin.js', array('jquery'), $this->version, false);
+    
+        // Cargar el script solo en la página de plugins
+        if ($hook === 'plugins.php') {
+            wp_enqueue_script('avilib-uninstall', AVILIB_URL . 'admin/js/avilib-uninstall.js', array('jquery'), $this->version, true);
+        }
     }
 
     public function add_admin_menu() {
@@ -41,14 +46,6 @@ class Avilib_Admin {
             'avilib-accepted',
             array($this, 'display_accepted_videos_page')
         );
-        add_submenu_page(
-            'avilib',
-            __('Categories', 'avilib'),
-            __('Categories', 'avilib'),
-            'manage_options',
-            'avilib-categories',
-            array($this, 'display_categories_page')
-        );
     }
 
     public function display_video_requests_page() {
@@ -57,9 +54,5 @@ class Avilib_Admin {
 
     public function display_accepted_videos_page() {
         require_once AVILIB_PATH . 'admin/partials/avilib-admin-accepted-videos.php';
-    }
-
-    public function display_categories_page() {
-        require_once AVILIB_PATH . 'admin/partials/avilib-admin-categories.php';
     }
 }
