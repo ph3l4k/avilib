@@ -1,0 +1,205 @@
+/* Estilos generales */
+.avilib-form,
+.avilib-video-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos del formulario */
+.avilib-form .form-group {
+    margin-bottom: 20px;
+}
+
+.avilib-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.avilib-form input[type="text"],
+.avilib-form input[type="url"],
+.avilib-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.avilib-form input[type="submit"] {
+    background-color: #0073aa;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.avilib-form input[type="submit"]:hover {
+    background-color: #005177;
+}
+
+/* Estilos de la lista de videos */
+.avilib-search-bar {
+    margin-bottom: 20px;
+}
+
+.avilib-search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.avilib-search-bar {
+    margin-bottom: 20px;
+    position: relative;
+    max-width: 100%; /* Asegura que no se desborde del contenedor padre */
+}
+
+.avilib-search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.avilib-search-bar input {
+    width: 100%;
+    padding: 10px 40px 10px 15px; /* Mantiene el padding derecho para el icono */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+.avilib-search-icon {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    color: #888;
+    pointer-events: none;
+}
+
+/* Opcional: Estilo del input en focus */
+.avilib-search-bar input:focus {
+    outline: none;
+    border-color: #0073aa;
+    box-shadow: 0 0 5px rgba(0, 115, 170, 0.5);
+}
+
+/* Opcional: Cambiar el color del icono cuando el input está en focus */
+.avilib-search-bar input:focus + .avilib-search-icon {
+    color: #0073aa;
+}
+
+.avilib-video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Card Video Library */
+.avilib-video-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.avilib-video-item h3 {
+    padding: 10px;
+    margin: 0;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.avilib-video-thumbnail {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.avilib-video-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avilib-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+/* Estilos del modal */
+.avilib-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.avilib-modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#avilib-modal-video-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    position: relative;
+}
+
+#avilib-modal-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.avilib-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    z-index: 1;
+}
+
+.avilib-close:hover,
+.avilib-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 700px) {
+    .avilib-modal-content {
+        width: 100%;
+    }
+}

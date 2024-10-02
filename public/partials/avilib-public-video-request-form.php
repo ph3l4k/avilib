@@ -13,28 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['avilib_submit'])) {
     ));
 
     if ($existing_video) {
-        echo '<p class="avilib-error">' . __('This video URL already exists in our system.', 'avilib') . '</p>';
+        echo '<p class="avilib-error">' . __('Esta URL de vídeo ya existe en nuestro sistema.', 'avilib') . '</p>';
     } else {
         $wpdb->insert(
             "{$wpdb->prefix}avilib_video_requests",
             array('title' => $title, 'url' => $url, 'status' => 'pending')
         );
 
-        echo '<p class="avilib-success">' . __('Video request submitted successfully!', 'avilib') . '</p>';
+        echo '<p class="avilib-success">' . __('¡Solicitud de vídeo enviada correctamente!', 'avilib') . '</p>';
     }
 }
 ?>
 
-<form method="post" class="avilib-form">
+<form method="post" class="avilib-form" id="avilib-video-form">
     <div class="form-group">
-        <label for="title"><?php _e('Title:', 'avilib'); ?></label>
+        <label for="title"><?php _e('Título:', 'avilib'); ?></label>
         <input type="text" name="title" id="title" required>
     </div>
     <div class="form-group">
-        <label for="url"><?php _e('Video URL:', 'avilib'); ?></label>
+        <label for="url"><?php _e('URL:', 'avilib'); ?></label>
         <input type="url" name="url" id="url" required>
     </div>
     <div class="form-group">
-        <input type="submit" name="avilib_submit" value="<?php _e('Submit', 'avilib'); ?>">
+        <input type="submit" name="avilib_submit" value="<?php _e('Enviar', 'avilib'); ?>">
     </div>
 </form>

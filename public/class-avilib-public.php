@@ -27,16 +27,29 @@ class Avilib_Public {
 
     public static function convert_to_embed_url($url) {
         if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $url, $id)) {
-            return 'https://www.youtube.com/embed/' . $id[1];
+            return 'https://www.youtube.com/embed/' . $id[1] . '?autoplay=1&controls=0';
         } elseif (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $url, $id)) {
-            return 'https://www.youtube.com/embed/' . $id[1];
+            return 'https://www.youtube.com/embed/' . $id[1] . '?autoplay=1&controls=0';
         } elseif (preg_match('/youtube\.com\/v\/([^\&\?\/]+)/', $url, $id)) {
-            return 'https://www.youtube.com/embed/' . $id[1];
+            return 'https://www.youtube.com/embed/' . $id[1] . '?autoplay=1&controls=0';
         } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $url, $id)) {
-            return 'https://www.youtube.com/embed/' . $id[1];
+            return 'https://www.youtube.com/embed/' . $id[1] . '?autoplay=1&controls=0';
         } elseif (preg_match('/vimeo\.com\/([^\&\?\/]+)/', $url, $id)) {
-            return 'https://player.vimeo.com/video/' . $id[1];
+            return 'https://player.vimeo.com/video/' . $id[1] . '?autoplay=1&controls=0';
         }
         return $url;
+    }
+
+    public static function get_video_thumbnail($url) {
+        if (strpos($url, 'youtube.com') !== false || strpos($url, 'youtu.be') !== false) {
+            preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url, $matches);
+            $id = $matches[1];
+            return 'https://img.youtube.com/vi/' . $id . '/0.jpg';
+        } elseif (strpos($url, 'vimeo.com') !== false) {
+            $id = substr(parse_url($url, PHP_URL_PATH), 1);
+            $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$id.php"));
+            return $hash[0]['thumbnail_large'];
+        }
+        return ''; // Retorna una imagen por defecto si no se encuentra una miniatura
     }
 }

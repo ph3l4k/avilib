@@ -18,11 +18,10 @@ define('AVILIB_VERSION', '2.0');
 define('AVILIB_PATH', plugin_dir_path(__FILE__));
 define('AVILIB_URL', plugin_dir_url(__FILE__));
 
-// Cargar el activador directamente
+// Cargar el activador y el autoloader directamente
 require_once AVILIB_PATH . 'includes/class-avilib-activator.php';
-
-// Cargar el autoloader
 require_once AVILIB_PATH . 'includes/class-avilib-autoloader.php';
+require_once AVILIB_PATH . 'includes/class-avilib.php';
 
 /**
  * Código que se ejecuta durante la activación del plugin.
@@ -35,6 +34,7 @@ function activate_avilib() {
  * Código que se ejecuta durante la desactivación del plugin.
  */
 function deactivate_avilib() {
+    require_once AVILIB_PATH . 'includes/class-avilib-deactivator.php';
     Avilib_Deactivator::deactivate();
 }
 

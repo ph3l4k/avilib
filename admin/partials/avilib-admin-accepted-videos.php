@@ -26,7 +26,7 @@ $videos = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}avilib_accepted_video
                 <?php foreach ($videos as $video) : ?>
                     <tr>
                         <td><?php echo esc_html($video->title); ?></td>
-                        <td><?php echo esc_url($video->url); ?></td>
+                        <td><?php echo '<a href="'.esc_url($video->url).'" target="_blank">Ver video</a>'; ?></td>
                         <td>
                             <form method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<?php echo esc_attr($video->id); ?>">

@@ -10,6 +10,11 @@ class Avilib {
     }
 
     private function load_dependencies() {
+        require_once AVILIB_PATH . 'includes/class-avilib-loader.php';
+        require_once AVILIB_PATH . 'includes/class-avilib-i18n.php';
+        require_once AVILIB_PATH . 'admin/class-avilib-admin.php';
+        require_once AVILIB_PATH . 'public/class-avilib-public.php';
+
         $this->loader = new Avilib_Loader();
     }
 
